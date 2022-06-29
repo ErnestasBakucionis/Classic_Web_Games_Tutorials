@@ -1,0 +1,14 @@
+### Learned JS properties and methods
+- querySelector()
+- Math.random()
+- .length
+- .createElement()
+- .setAttribute()
+- .append()
+- .getAttribute()
+- alert()
+- .push()
+- setTimeout()
+- .querySelectorAll()
+- .removeEventListener()
+- .textContent
