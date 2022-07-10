@@ -56,6 +56,7 @@ cardArray.sort(() => 0.5 - Math.random())
 // Searching for element with ID "grid" in the document and stores it in "gridDisplay"
 const gridDisplay = document.querySelector('#grid')
 const resultDisplay = document.querySelector('#result')
+const notificationDisplay = document.querySelector('#notification')
 let cardsChosen = []
 let cardsChosenIds = []
 const cardsWon = []
@@ -68,7 +69,7 @@ function createBoard() {
         const card = document.createElement('img') // Add img element and store it in card constant.
         setTimeout(function(){
             card.setAttribute('src', 'images/blank.png')
-        }, 500);
+        }, 1000);
         card.setAttribute('src', cardArray[i].img) // Add attribute src = link
         
         card.setAttribute('data-id', i) // Add attribute data-id that equals to loop i element.
@@ -86,13 +87,11 @@ function checkMatch() {
     const optionTwoId = cardsChosenIds[1]
 
     if (optionOneId == optionTwoId) {
-        alert('You have clicked the same image!')
+        notificationDisplay.textContent = 'You have clicked the same image!';
         cards[optionOneId].setAttribute('src', 'images/blank.png')
         cards[optionTwoId].setAttribute('src', 'images/blank.png')
-    }
-
-    if (cardsChosen[0] == cardsChosen[1]) {
-        alert('You found a match!')
+    } else if (cardsChosen[0] == cardsChosen[1]) {
+        notificationDisplay.textContent = 'You found a match!';
         cards[optionOneId].setAttribute('src', 'images/white.png')
         cards[optionTwoId].setAttribute('src', 'images/white.png')
         cards[optionOneId].removeEventListener('click', flipCard)
@@ -101,7 +100,7 @@ function checkMatch() {
     } else {
         cards[optionOneId].setAttribute('src', 'images/blank.png')
         cards[optionTwoId].setAttribute('src', 'images/blank.png')
-        alert('Sorry try again!')
+        notificationDisplay.textContent = 'Sorry try again!';
     }
 
     resultDisplay.textContent = cardsWon.length
@@ -119,6 +118,7 @@ function flipCard() {
     cardsChosen.push(cardArray[cardId].name) // pushing clicked card.name to cardsChosen array
     cardsChosenIds.push(cardId)
     this.setAttribute('src', cardArray[cardId].img) // change clicked blank img to another img
+
     if (cardsChosen.length === 2){
         setTimeout(checkMatch, 500)
     }
