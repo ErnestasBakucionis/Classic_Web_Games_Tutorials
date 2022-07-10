@@ -60,10 +60,17 @@ let cardsChosen = []
 let cardsChosenIds = []
 const cardsWon = []
 
+
+
 function createBoard() {
+
     for (let i = 0; i < cardArray.length; i++) {
         const card = document.createElement('img') // Add img element and store it in card constant.
-        card.setAttribute('src', 'images/blank.png') // Add attribute src = link
+        setTimeout(function(){
+            card.setAttribute('src', 'images/blank.png')
+        }, 500);
+        card.setAttribute('src', cardArray[i].img) // Add attribute src = link
+        
         card.setAttribute('data-id', i) // Add attribute data-id that equals to loop i element.
         card.addEventListener('click', flipCard) // Listen if image is clicked (and if clicked run "flipCard" function)
         gridDisplay.appendChild(card) // Append card element to gridDisplay
