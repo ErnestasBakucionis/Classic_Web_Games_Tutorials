@@ -3,14 +3,49 @@
     height: 300px;
     display: flex;
     flex-wrap: wrap;
+    
 }
 
 #result {
     color: rgb(71, 97, 32);
-    background-color: rgb(223, 181, 126);
 }
 
 #notification {
     color: brown;
-    background-color: aqua;
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgb(255, 164, 164);
+    padding: 25px;
+    text-align: center;
+}
+
+h3 {
+    border: 1px solid rgb(255, 164, 164);
+    margin: 3%;
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#playBtn {
+    display: flex;
+    justify-content: center;
+    border: none;
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: large;
+    text-transform: uppercase;
+    border-radius: 20px;
+    width: 100%;
+    margin: 0 0 4% 0;
+}
+
+#playBtn:hover {
+    background-color: rgb(226, 130, 130);
+    color: white;
 }

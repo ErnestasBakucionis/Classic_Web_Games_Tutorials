@@ -57,11 +57,15 @@ cardArray.sort(() => 0.5 - Math.random())
 const gridDisplay = document.querySelector('#grid')
 const resultDisplay = document.querySelector('#result')
 const notificationDisplay = document.querySelector('#notification')
+const playBtn = document.querySelector('#playBtn')
+const timerDisplay = document.querySelector('#timer')
 let cardsChosen = []
 let cardsChosenIds = []
 const cardsWon = []
 
-
+// Timer vars
+let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+let int = null;
 
 function createBoard() {
 
@@ -79,7 +83,50 @@ function createBoard() {
     }
 }
 
-createBoard()
+// Start timer function
+function startTimer() {
+    if(int!==null){
+        clearInterval(int);
+    }
+    int = setInterval(displayTimer,10);
+}
+
+// Timer counting function
+function displayTimer(){
+    milliseconds+=10;
+
+    if(milliseconds == 1000){
+        milliseconds = 0;
+        seconds++;
+
+        if(seconds == 60){
+            seconds = 0;
+            minutes++;
+
+            if(minutes == 60){
+                minutes = 0;
+                hours++;
+            }
+        }
+    }
+
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+    let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
+
+    timerDisplay.innerHTML = ` ${h}:${m}:${s}:${ms}`
+}
+
+// Checking if player pressed play button...
+playBtn.addEventListener('click', PlayerPlaying)
+
+function PlayerPlaying() {
+        playBtn.remove();
+        startTimer();
+        createBoard();
+}
+
 
 function checkMatch() {
     const cards = document.querySelectorAll('img')
@@ -109,7 +156,9 @@ function checkMatch() {
     cardsChosenIds = []
 
     if (cardsWon.length == cardArray.length/2) {
-        resultDisplay.textContent = 'Congrats, you found them all!'
+        //resultDisplay.textContent = 'Congrats, you found them all!'
+        notificationDisplay.textContent = 'Congrats, you found them all!';
+        clearInterval(int);
     }
 }
 
